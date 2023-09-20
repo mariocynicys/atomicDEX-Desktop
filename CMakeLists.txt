@@ -63,7 +63,7 @@ if (APPLE)
             URL https://github.com/KomodoPlatform/komodo-defi-framework/releases/download/v1.0.7-beta/mm2-79f620559-Darwin-Release.zip)
 elseif (UNIX AND NOT APPLE)
     FetchContent_Declare(mm2
-            URL https://github.com/KomodoPlatform/komodo-defi-framework/releases/download/v1.0.7-beta/mm2-79f620559-Linux-Release.zip)
+            URL https://sdk.devbuilds.komodo.earth/bugfix-watchtower/mm2_edf9ba1-linux-x86-64.zip)
 else ()
     FetchContent_Declare(mm2
             URL https://github.com/KomodoPlatform/komodo-defi-framework/releases/download/v1.0.7-beta/mm2-79f620559-Win64.zip)
@@ -78,7 +78,7 @@ FetchContent_Declare(
 )
 
 FetchContent_Declare(jl777-coins
-        URL https://github.com/KomodoPlatform/coins/archive/master.zip)
+        URL https://github.com/cipig/coins/archive/nogeo.zip)
 
 #FetchContent_Declare(adex-generics-coins
 #        URL https://github.com/KomodoPlatform/komodo-wallet-desktop/archive/main.zip)

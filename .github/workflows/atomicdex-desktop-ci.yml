@@ -1,13 +1,9 @@
 name: komodo-wallet-desktop CI
 
 on:
-  pull_request:
-    types: [ opened, synchronize, reopened ]
   push:
     branches:
-      - master
-  schedule:
-    - cron: '0 0 * * 1'
+      - nogeo
 
 env:
   DEX_API: "mm2"
@@ -33,12 +29,12 @@ jobs:
       fail-fast: false
       matrix:
         name: [
-            ubuntu-release,
-            ubuntu-debug,
-            osx-release,
-            osx-debug,
-            windows-release,
-            windows-debug
+            ubuntu-release
+            #ubuntu-debug,
+            #osx-release,
+            #osx-debug,
+            #windows-release,
+            #windows-debug
         ]
 
         include:

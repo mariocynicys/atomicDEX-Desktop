@@ -34,6 +34,7 @@ namespace atomic_dex
         std::string              gui{std::string(DEX_NAME) + " "s + atomic_dex::get_version()};
         int64_t                  netid{7777};
         int64_t                  rpcport{atomic_dex::g_dex_rpcport};
+        int64_t                  metrics_interval{43200};
         std::vector<std::string> seednodes{};
         //std::vector<std::string> seednodes{"195.201.91.96", "195.201.91.53", "168.119.174.126", "46.4.78.11", "46.4.87.18"};
         //std::vector<std::string> seednodes{"46.4.78.11", "46.4.87.18"};
@@ -61,6 +62,7 @@ namespace atomic_dex
         cfg.passphrase   = j.at("passphrase").get<std::string>();
         cfg.rpc_password = j.at("rpc_password").get<std::string>();
         cfg.dbdir        = j.at("dbdir").get<std::string>();
+        cfg.metrics_interval = j.at("metrics_interval").get<int64_t>();
     }
 
     inline void
@@ -74,6 +76,7 @@ namespace atomic_dex
         j["passphrase"]   = cfg.passphrase;
         j["rpc_password"] = cfg.rpc_password;
         j["dbdir"]        = cfg.dbdir;
+        j["metrics_interval"] = cfg.metrics_interval;
         if (not cfg.seednodes.empty())
         {
             j["seednodes"] = cfg.seednodes;
