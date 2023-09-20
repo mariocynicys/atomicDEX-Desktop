@@ -660,7 +660,6 @@ namespace atomic_dex
                         failed_tickers.push_back(coin.ticker);
                     }
                     update_coin_active(failed_tickers, false);
-                    fetch_infos_thread(false, false);
                 }
             }
             catch (const std::exception& error)
@@ -763,7 +762,6 @@ namespace atomic_dex
                         failed_tickers.push_back(coin.ticker);
                     }
                     update_coin_active(failed_tickers, false);
-                    fetch_infos_thread(false, false);
                 }
             }
             catch (const std::exception& error)
