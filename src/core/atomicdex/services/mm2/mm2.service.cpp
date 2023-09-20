@@ -265,6 +265,7 @@ namespace atomic_dex
     {
         m_orderbook_clock = std::chrono::high_resolution_clock::now();
         m_info_clock      = std::chrono::high_resolution_clock::now();
+        m_coins_clock     = std::chrono::high_resolution_clock::now();
         dispatcher_.sink<gui_enter_trading>().connect<&mm2_service::on_gui_enter_trading>(*this);
         dispatcher_.sink<gui_leave_trading>().connect<&mm2_service::on_gui_leave_trading>(*this);
         dispatcher_.sink<orderbook_refresh>().connect<&mm2_service::on_refresh_orderbook>(*this);
@@ -280,11 +281,12 @@ namespace atomic_dex
             return;
         }
 
-        const auto now    = std::chrono::high_resolution_clock::now();
-        const auto s      = std::chrono::duration_cast<std::chrono::seconds>(now - m_orderbook_clock);
-        const auto s_info = std::chrono::duration_cast<std::chrono::seconds>(now - m_info_clock);
+        const auto now     = std::chrono::high_resolution_clock::now();
+        const auto s_coins = std::chrono::duration_cast<std::chrono::seconds>(now - m_coins_clock);
+        const auto s_book  = std::chrono::duration_cast<std::chrono::seconds>(now - m_orderbook_clock);
+        const auto s_info  = std::chrono::duration_cast<std::chrono::seconds>(now - m_info_clock);
 
-        if (s >= 5s)
+        if (s_coins >= 5s)
         {
             if (m_nb_update_required > 0)
             {
@@ -305,6 +307,11 @@ namespace atomic_dex
                 }
                 m_nb_update_required -= 1;
             }
+            m_coins_clock = std::chrono::high_resolution_clock::now();
+        }
+
+        if (s_book >= 7s)
+        {
             fetch_current_orderbook_thread(false);
             batch_fetch_orders_and_swap();
             m_orderbook_clock = std::chrono::high_resolution_clock::now();
