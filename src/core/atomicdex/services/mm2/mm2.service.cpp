@@ -317,7 +317,7 @@ namespace atomic_dex
             m_orderbook_clock = std::chrono::high_resolution_clock::now();
         }
 
-        if (s_info >= 30s)
+        if (s_info >= 300s)
         {
             fetch_infos_thread();
             m_info_clock = std::chrono::high_resolution_clock::now();
