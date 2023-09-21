@@ -599,7 +599,7 @@ namespace atomic_dex
                                     // TODO: Handle this case.
                                     // There could be no error message if scanning takes too long.
                                     // Either we force disable here, or schedule to check on it later
-                                    SPDLOG_DEBUG("Exited zhtlc withdraw loop after 120 tries");
+                                    SPDLOG_DEBUG("Exited zhtlc withdraw loop after 600 tries");
                                     SPDLOG_DEBUG("Bad answer for [{}] zhtlc withdraw_status: {}", ticker, z_error[0].dump(4));
                                     set_withdraw_status("Timed out");
                                 }

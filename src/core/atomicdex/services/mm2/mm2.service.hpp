@@ -90,6 +90,7 @@ namespace atomic_dex
        //! Timers
        t_mm2_time_point m_orderbook_clock;
        t_mm2_time_point m_info_clock;
+       t_mm2_time_point m_coins_clock;
 
        //! Atomicity / Threads
        std::atomic_bool m_mm2_running{false};
