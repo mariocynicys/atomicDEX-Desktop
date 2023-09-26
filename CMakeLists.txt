@@ -63,7 +63,7 @@ if (APPLE)
             URL https://sdk.devbuilds.komodo.earth/dev/mm2_bd69fbd-mac-x86-64.zip)
 elseif (UNIX AND NOT APPLE)
     FetchContent_Declare(mm2
-            URL https://sdk.devbuilds.komodo.earth/fix-web3-nodes-timeout/mm2_f2886c3-linux-x86-64.zip)
+            URL https://sdk.devbuilds.komodo.earth/fix-web3-nodes-timeout/mm2_57c2963-linux-x86-64.zip)
 else ()
     FetchContent_Declare(mm2
             URL https://sdk.devbuilds.komodo.earth/dev/mm2_bd69fbd-win-x86-64.zip)
