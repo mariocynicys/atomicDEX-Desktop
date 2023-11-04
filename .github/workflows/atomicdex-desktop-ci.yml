@@ -30,7 +30,11 @@ jobs:
       matrix:
         name: [
             ubuntu-release,
-            ubuntu-debug
+            ubuntu-debug,
+            osx-release,
+            osx-debug,
+            windows-release,
+            windows-debug
         ]
 
         include:
@@ -45,6 +49,30 @@ jobs:
             qt: '5.15.2'
             type: 'Debug'
             host: 'linux'
+
+          - name: osx-release
+            os: macos-12
+            qt: '5.15.2'
+            type: 'Release'
+            host: 'mac'
+
+          - name: osx-debug
+            os: macos-12
+            qt: '5.15.2'
+            type: 'Debug'
+            host: 'mac'
+
+          - name: windows-release
+            os: windows-latest
+            qt: '5.15.2'
+            type: 'Release'
+            host: 'windows'
+
+          - name: windows-debug
+            os: windows-latest
+            qt: '5.15.2'
+            type: 'Debug'
+            host: 'windows'
 
     steps:
       - uses: actions/checkout@v3
@@ -172,27 +200,6 @@ jobs:
         with:
           vcpkgDirectory: '${{ github.workspace }}/ci_tools_atomic_dex/vcpkg-repo'
           vcpkgJsonGlob: 'vcpkg.json'
-
-      - name: import code signing certificates (macos)
-        if: runner.os == 'macOS'  && 'KomodoPlatform/komodo-wallet-desktop' == github.repository
-        uses: Apple-Actions/import-codesign-certs@v1
-        with:
-          keychain: ${{ github.run_id }}
-          keychain-password: ${{ github.run_id }}
-          p12-file-base64: ${{ secrets.CERTIFICATES_P12 }}
-          p12-password: ${{ secrets.CERTIFICATES_P12_PASSWORD }}
-
-      - name: import installer code signing certificates (macos)
-        if: runner.os == 'macOS'  && 'KomodoPlatform/komodo-wallet-desktop' == github.repository
-        uses: apple-actions/import-codesign-certs@v1
-        with:
-          keychain: ${{ github.run_id }}
-          keychain-password: ${{ github.run_id }}
-          create-keychain: false
-          p12-file-base64: ${{ secrets.CERTIFICATES_INSTALLER_P12 }}
-          p12-password: ${{ secrets.CERTIFICATES_P12_PASSWORD }}
-
-
 
       - name: Build Komodo Wallet (MacOS)
         if: runner.os == 'macOS'
