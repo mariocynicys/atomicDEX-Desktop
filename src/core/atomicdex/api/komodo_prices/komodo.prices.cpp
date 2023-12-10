@@ -79,8 +79,16 @@ namespace atomic_dex::komodo_prices::api
     {
         web::http::http_request req;
         req.set_method(web::http::methods::GET);
-        SPDLOG_INFO("url: {}", TO_STD_STR(g_komodo_prices_client->base_uri().to_string()) + "api/v2/tickers?expire_at=259200");
-        req.set_request_uri(FROM_STD_STR("/api/v2/tickers?expire_at=259200"));
+        std::string endpoint = fallback ? "/api/v2/tickers?expire_at=259200" : "/api/v3/prices/tickers_v2?expire_at=259200";
+        if (fallback)
+        {
+            SPDLOG_INFO("url: {}", TO_STD_STR(g_komodo_prices_client_fallback->base_uri().to_string()) + endpoint);
+        }
+        else
+        {
+            SPDLOG_INFO("url: {}", TO_STD_STR(g_komodo_prices_client->base_uri().to_string()) + endpoint);
+        }
+        req.set_request_uri(FROM_STD_STR(endpoint));
         return fallback ? g_komodo_prices_client_fallback->request(req) : g_komodo_prices_client->request(req);
     }
 } // namespace atomic_dex::komodo_prices::api
