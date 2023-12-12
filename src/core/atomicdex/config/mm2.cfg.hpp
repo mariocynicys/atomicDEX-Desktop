@@ -32,11 +32,11 @@ namespace atomic_dex
     struct mm2_config
     {
         std::string              gui{std::string(DEX_NAME) + " "s + atomic_dex::get_version()};
-        int64_t                  netid{7777};
+        int64_t                  netid{8762};
         int64_t                  rpcport{atomic_dex::g_dex_rpcport};
         int64_t                  metrics_interval{43200};
-        //std::vector<std::string> seednodes{};
-        std::vector<std::string> seednodes{"46.4.78.11", "46.4.87.18", "168.119.236.246"};
+        std::vector<std::string> seednodes{};
+        //std::vector<std::string> seednodes{"46.4.78.11", "46.4.87.18", "168.119.236.246"};
         //std::vector<std::string> seednodes{"46.4.78.11", "46.4.87.18", "38.91.100.29", "162.55.5.83", "2.56.154.200"};
 #ifdef _WIN32
         std::string userhome{utils::u8string(std::filesystem::path(_wgetenv(L"HOMEPATH")))};
