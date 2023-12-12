@@ -659,7 +659,7 @@ namespace atomic_dex
                         m_coins_informations[coin.ticker].currently_enabled = false;
                         failed_tickers.push_back(coin.ticker);
                     }
-                    update_coin_active(failed_tickers, false);
+                    //update_coin_active(failed_tickers, false);
                 }
             }
             catch (const std::exception& error)
