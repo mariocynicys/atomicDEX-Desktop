@@ -63,7 +63,7 @@ if (APPLE)
             URL https://github.com/KomodoPlatform/komodo-defi-framework/releases/download/v1.0.7-beta/mm2-79f620559-Darwin-Release.zip)
 elseif (UNIX AND NOT APPLE)
     FetchContent_Declare(mm2
-            URL https://sdk.devbuilds.komodo.earth/dev/mm2_52dab22-linux-x86-64.zip)
+            URL https://sdk.devbuilds.komodo.earth/get-yamux-improvements/mm2_91be151-linux-x86-64.zip)
 else ()
     FetchContent_Declare(mm2
             URL https://github.com/KomodoPlatform/komodo-defi-framework/releases/download/v1.0.7-beta/mm2-79f620559-Win64.zip)
