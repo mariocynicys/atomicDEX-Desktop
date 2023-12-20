@@ -728,7 +728,7 @@ namespace atomic_dex
                         m_coins_informations[coin.ticker].currently_enabled = false;
                         failed_tickers.push_back(coin.ticker);
                     }
-                    update_coin_active(failed_tickers, false);
+                    //update_coin_active(failed_tickers, false);
                     fetch_infos_thread(false, false);
                 }
             }
@@ -836,7 +836,7 @@ namespace atomic_dex
                         m_coins_informations[coin.ticker].currently_enabled = false;
                         failed_tickers.push_back(coin.ticker);
                     }
-                    update_coin_active(failed_tickers, false);
+                    //update_coin_active(failed_tickers, false);
                     fetch_infos_thread(false, false);
                 }
             }
@@ -924,7 +924,7 @@ namespace atomic_dex
                     SPDLOG_ERROR("marking {} as inactive: {}", rpc.request.ticker, rpc.error->error_type);
                     std::unique_lock lock(m_coin_cfg_mutex);
                     m_coins_informations[rpc.request.ticker].currently_enabled = false;
-                    update_coin_active({rpc.request.ticker}, false);
+                    //update_coin_active({rpc.request.ticker}, false);
                     this->dispatcher_.trigger<enabling_coin_failed>(rpc.request.ticker, rpc.error->error);
                 }
             }
@@ -1042,7 +1042,7 @@ namespace atomic_dex
                 {
                     std::unique_lock lock(m_coin_cfg_mutex);
                     m_coins_informations[rpc.request.ticker].currently_enabled = false;
-                    update_coin_active({rpc.request.ticker}, false);
+                    //update_coin_active({rpc.request.ticker}, false);
                     this->dispatcher_.trigger<enabling_coin_failed>(rpc.request.ticker, rpc.error->error);
                 }
             }
@@ -1254,7 +1254,7 @@ namespace atomic_dex
                 {
                     std::unique_lock lock(m_coin_cfg_mutex);
                     m_coins_informations[rpc.request.ticker].currently_enabled = false;
-                    update_coin_active({rpc.request.ticker}, false);
+                    //update_coin_active({rpc.request.ticker}, false);
                     this->dispatcher_.trigger<enabling_coin_failed>(rpc.request.ticker, rpc.error->error);
                 }
             }
@@ -1361,7 +1361,7 @@ namespace atomic_dex
                 {
                     std::unique_lock lock(m_coin_cfg_mutex);
                     m_coins_informations[rpc.request.ticker].currently_enabled = false;
-                    update_coin_active({rpc.request.ticker}, false);
+                    //update_coin_active({rpc.request.ticker}, false);
                     this->dispatcher_.trigger<enabling_coin_failed>(rpc.request.ticker, rpc.error->error);
                 }
             }
