@@ -60,20 +60,26 @@ namespace atomic_dex
         for (auto&& ticker: tickers)
         {
             if (m_ticker_registry.find(ticker) != m_ticker_registry.end())
+            {
+                SPDLOG_INFO("ticker {} not in m_ticker_registry", ticker);
                 continue;
+            }
+            SPDLOG_INFO("initialize_portfolio for ticker: {}", ticker);
             const auto& mm2_system    = this->m_system_manager.get_system<mm2_service>();
             const auto& price_service = this->m_system_manager.get_system<global_price_service>();
             const auto& provider      = this->m_system_manager.get_system<komodo_prices_provider>();
             auto        coin          = mm2_system.get_coin_info(ticker);
-
+            SPDLOG_INFO("Building portfolio for ticker {}", coin.ticker);
             std::error_code ec;
+            std::string balance       = mm2_system.my_balance(coin.ticker, ec);
+            SPDLOG_INFO("balance for ticker {}: {}", coin.ticker, balance);
             const QString   change_24h = retrieve_change_24h(provider, coin, *m_config, m_system_manager);
             portfolio_data  data{
                 .ticker                           = QString::fromStdString(coin.ticker),
                 .gui_ticker                       = QString::fromStdString(coin.gui_ticker),
                 .coin_type                        = QString::fromStdString(coin.type),
                 .name                             = QString::fromStdString(coin.name),
-                .balance                          = QString::fromStdString(mm2_system.my_balance(coin.ticker, ec)),
+                .balance                          = QString::fromStdString(balance),
                 .main_currency_balance            = QString::fromStdString(price_service.get_price_in_fiat(m_config->current_currency, coin.ticker, ec)),
                 .change_24h                       = change_24h,
                 .main_currency_price_for_one_unit = QString::fromStdString(price_service.get_rate_conversion(m_config->current_currency, coin.ticker, true)),
@@ -114,13 +120,14 @@ namespace atomic_dex
         {
             if (m_ticker_registry.find(coin.ticker) == m_ticker_registry.end())
             {
-                SPDLOG_WARN("ticker: {} not inserted yet in the model, skipping", coin.ticker);
+                SPDLOG_WARN("[update_currency_values] ticker: {} not inserted yet in the model, skipping", coin.ticker);
                 return false;
             }
             const std::string& ticker = coin.ticker;
             if (const auto res = this->match(this->index(0, 0), TickerRole, QString::fromStdString(ticker), 1, Qt::MatchFlag::MatchExactly);
                 not res.isEmpty())
             {
+                // SPDLOG_INFO("[update_currency_values] for ticker: {}", coin.ticker);
                 std::error_code    ec;
                 const QModelIndex& idx                         = res.at(0);
                 const QString      main_currency_balance_value = QString::fromStdString(price_service.get_price_in_fiat(currency, ticker, ec));
@@ -171,9 +178,10 @@ namespace atomic_dex
                 SPDLOG_WARN("ticker: {} not inserted yet in the model, skipping", ticker);
                 return false;
             }
-            // SPDLOG_DEBUG("trying updating balance values of: {}", ticker);
+            
             if (const auto res = this->match(this->index(0, 0), TickerRole, QString::fromStdString(ticker), 1, Qt::MatchFlag::MatchExactly); not res.isEmpty())
             {
+                // SPDLOG_DEBUG("Updating balance values of: {}", ticker);
                 const auto&        mm2_system    = this->m_system_manager.get_system<mm2_service>();
                 const auto*        global_cfg    = this->m_system_manager.get_system<portfolio_page>().get_global_cfg();
                 const auto         coin          = global_cfg->get_coin_info(ticker);
