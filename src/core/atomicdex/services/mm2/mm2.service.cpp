@@ -288,7 +288,7 @@ namespace atomic_dex
         const auto s_info       = std::chrono::duration_cast<std::chrono::seconds>(now - m_info_clock);
         const auto s_activation = std::chrono::duration_cast<std::chrono::seconds>(now - m_activation_clock);
 
-        if (s_orderbook >= 5s)
+        if (s_orderbook >= 9s)
         {
             fetch_current_orderbook_thread(false); // process_orderbook (not a reset) if on trading page
             batch_fetch_orders_and_swap(); // gets 'my_orders', 'my_recent_swaps' & 'active_swaps'
@@ -332,7 +332,7 @@ namespace atomic_dex
             }
         }
 
-        if (s_info >= 29s)
+        if (s_info >= 49s)
         {
             fetch_infos_thread(); // leads to batch_balance_and_tx
             m_info_clock = std::chrono::high_resolution_clock::now();
