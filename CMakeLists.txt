@@ -63,7 +63,7 @@ if (APPLE)
             URL https://sdk.devbuilds.komodo.earth/main/mm2_b0fd99e-mac-x86-64.zip)
 elseif (UNIX AND NOT APPLE)
     FetchContent_Declare(mm2
-            URL https://sdk.devbuilds.komodo.earth/gas-limit-override/mm2_7020714-linux-x86-64.zip)
+            URL https://sdk.devbuilds.komodo.earth/gas-limit-override/mm2_2dc40ec-linux-x86-64.zip)
 else ()
     FetchContent_Declare(mm2
             URL https://sdk.devbuilds.komodo.earth/main/mm2_b0fd99e-win-x86-64.zip)
