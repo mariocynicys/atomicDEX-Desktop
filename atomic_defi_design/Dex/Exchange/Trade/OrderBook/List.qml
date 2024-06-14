@@ -72,15 +72,28 @@ Item
     }
 
     Connections {
-        target: API.app.trading_pg
-        onMarketModeChanged: {
-            if (isAsk)  quickscroll_timer.start()
+        target: API.app.trading_pg;
+
+        function onMarketModeChanged()
+        {
+            if (isAsk)
+            {
+                quickscroll_timer.start()
+            }
         }
-        onOrderbookChanged: {
-            if (isAsk)  quickscroll_timer.start()
+        function onOrderbookChanged()
+        {
+            if (isAsk)
+            {
+                quickscroll_timer.start()
+            }
         }
-        onMarketPairsChanged: {
-            if (isAsk)  quickscroll_timer.start()
+        function onMarketPairsChanged()
+        {
+            if (isAsk)
+            {
+                quickscroll_timer.start()
+            }
         }
     }
 }
