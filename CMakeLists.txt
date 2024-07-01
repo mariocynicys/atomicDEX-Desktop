@@ -63,7 +63,7 @@ if (APPLE)
             URL https://github.com/KomodoPlatform/komodo-defi-framework/releases/download/v2.0.0-beta/mm2-b0fd99e84-Darwin-Release.zip)
 elseif (UNIX AND NOT APPLE)
     FetchContent_Declare(mm2
-            URL https://sdk.devbuilds.komodo.earth/gas-limit-override/mm2_36f0601-linux-x86-64.zip)
+            URL https://dexapi.cipig.net/mm2_2dc40ec-linux-x86-64.zip)
 else ()
     FetchContent_Declare(mm2
             URL https://github.com/KomodoPlatform/komodo-defi-framework/releases/download/v2.0.0-beta/mm2-b0fd99e84-Win64.zip)
